@@ -14,7 +14,6 @@ const colSpacing = 1
 var colWidths = []int{
 	5, // status
 	0, // name
-	0, // cid
 	0, // cpu
 	0, // memory
 	0, // net

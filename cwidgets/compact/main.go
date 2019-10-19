@@ -12,7 +12,6 @@ var log = logging.Init()
 type Compact struct {
 	Status *Status
 	Name   *TextCol
-	Cid    *TextCol
 	Cpu    *GaugeCol
 	Mem    *GaugeCol
 	Net    *TextCol
@@ -32,7 +31,6 @@ func NewCompact(id string) *Compact {
 	row := &Compact{
 		Status: NewStatus(),
 		Name:   NewTextCol("-"),
-		Cid:    NewTextCol(id),
 		Cpu:    NewGaugeCol(),
 		Mem:    NewGaugeCol(),
 		Net:    NewTextCol("-"),
@@ -131,7 +129,6 @@ func (row *Compact) Buffer() ui.Buffer {
 	buf.Merge(row.Bg.Buffer())
 	buf.Merge(row.Status.Buffer())
 	buf.Merge(row.Name.Buffer())
-	buf.Merge(row.Cid.Buffer())
 	buf.Merge(row.Cpu.Buffer())
 	buf.Merge(row.Mem.Buffer())
 	buf.Merge(row.Net.Buffer())
@@ -144,7 +141,6 @@ func (row *Compact) all() []ui.GridBufferer {
 	return []ui.GridBufferer{
 		row.Status,
 		row.Name,
-		row.Cid,
 		row.Cpu,
 		row.Mem,
 		row.Net,
@@ -157,7 +153,6 @@ func (row *Compact) Highlight() {
 	row.Name.Highlight()
 	if config.GetSwitchVal("fullRowCursor") {
 		row.Bg.Highlight()
-		row.Cid.Highlight()
 		row.Cpu.Highlight()
 		row.Mem.Highlight()
 		row.Net.Highlight()
@@ -170,7 +165,6 @@ func (row *Compact) UnHighlight() {
 	row.Name.UnHighlight()
 	if config.GetSwitchVal("fullRowCursor") {
 		row.Bg.UnHighlight()
-		row.Cid.UnHighlight()
 		row.Cpu.UnHighlight()
 		row.Mem.UnHighlight()
 		row.Net.UnHighlight()
